@@ -22,8 +22,6 @@ public class Transaction implements Serializable {
 
     private BigDecimal amount;
 
-    private LocalDateTime transactionTime;
-
     private String transactionType ;
 
 }

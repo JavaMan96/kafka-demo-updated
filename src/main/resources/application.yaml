@@ -1,0 +1,36 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092  # Kafka broker configuration
+    consumer:
+      group-id: group1      # Consumer group ID
+      auto-offset-reset: earliest       # Start consuming from the earliest offset if no offset exists
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: true          # Automatically commit offsets
+      auto-commit-interval: 1000        # Auto-commit interval in ms
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: "1"                         # Acknowledgment from Kafka
+      retries: 3                        # Retry up to 3 times in case of failure
+      batch-size: 16384                 # Optional: batch size in bytes
+      buffer-memory: 33554432           # Optional: buffer memory in bytes (32 MB)
+
+  datasource:
+    url: jdbc:h2:mem:testdb             # H2 in-memory database
+    driver-class-name: org.h2.Driver
+    username: sa                        # H2 default username
+    password:                           # No password by default
+
+  h2:
+    console:
+      enabled: true                     # Enable the H2 console for testing/debugging
+      path: /h2-console                 # Path for accessing the H2 console
+
+  jpa:
+    hibernate:
+      ddl-auto: update                  # Automatically update the database schema
+    show-sql: true                      # Show SQL queries in the console
+    database-platform: org.hibernate.dialect.H2Dialect
+
+
